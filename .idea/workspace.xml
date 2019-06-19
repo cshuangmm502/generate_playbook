@@ -121,7 +121,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/test/Generate_Playbook.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="513">
-              <caret line="31" column="29" lean-forward="true" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
+              <caret line="31" column="29" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#265#266#0" expanded="true" />
@@ -304,12 +304,12 @@
       <workItem from="1560738240191" duration="23947000" />
       <workItem from="1560822864001" duration="20109000" />
       <workItem from="1560930871340" duration="537000" />
-      <workItem from="1560931566982" duration="347000" />
+      <workItem from="1560931566982" duration="2146000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="84689000" />
+    <option name="totallyTimeSpent" value="86488000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -377,7 +377,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/test/Generate_Playbook.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="513">
-          <caret line="31" column="29" lean-forward="true" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
+          <caret line="31" column="29" selection-start-line="31" selection-start-column="29" selection-end-line="31" selection-end-column="29" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#265#266#0" expanded="true" />
