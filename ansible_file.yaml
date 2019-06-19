@@ -1,0 +1,275 @@
+---
+- hosts: all
+  name: common option in all computer
+  remote_user: root
+  tasks:
+    - name: creat project directory in all
+      file:
+        path: /root/go/fabric-samples/newTest
+        state: directory
+        owner: root
+        group: root
+
+    - name: send crypto-config to all
+      copy:
+        src: /root/go/fabric-samples/newTest/crypto-config
+        dest: /root/go/fabric-samples/newTest
+        owner: root
+        group: root
+
+    - name: send channel-artifacts to all
+      copy:
+        src: /root/go/fabric-samples/newTest/channel-artifacts
+        dest: /root/go/fabric-samples/newTest
+        owner: root
+        group: root
+
+    - name: send chaincode to all
+      copy:
+        src: /root/go/fabric-samples/newTest/chaincode
+        dest: /root/go/fabric-samples/newTest
+        owner: root
+        group: root
+
+    - name: send scripts to all
+      copy:
+        src: /root/go/fabric-samples/newTest/scripts
+        dest: /root/go/fabric-samples/newTest
+        owner: root
+        group: root
+
+    - name: send env to all
+      copy:
+        src: /root/go/fabric-samples/newTest/.env
+        dest: /root/go/fabric-samples/newTest
+        owner: root
+        group: root
+
+- hosts: zookeeper_group
+  name: send file to zookeeper_group
+  remote_user: root
+  tasks:
+    - name: send zookeeper0 to 192.168.1.23
+      copy:
+        src: /root/go/fabric-samples/newTest/zookeeper0.yaml
+        dest: /root/go/fabric-samples/newTest/
+        owner: root
+        group: root
+      notify: up zookeeper0.yaml
+      when: ansible_default_ipv4.address == "192.168.1.23"
+
+    - name: send zookeeper1 to 192.168.1.23
+      copy:
+        src: /root/go/fabric-samples/newTest/zookeeper1.yaml
+        dest: /root/go/fabric-samples/newTest/
+        owner: root
+        group: root
+      notify: up zookeeper1.yaml
+      when: ansible_default_ipv4.address == "192.168.1.23"
+
+    - name: send zookeeper2 to 192.168.1.24
+      copy:
+        src: /root/go/fabric-samples/newTest/zookeeper2.yaml
+        dest: /root/go/fabric-samples/newTest/
+        owner: root
+        group: root
+      notify: up zookeeper2.yaml
+      when: ansible_default_ipv4.address == "192.168.1.24"
+
+  handlers:
+    - name: up zookeeper0.yaml
+      command: chdir=/root/go/fabric-samples/newTest docker-compose -f zookeeper0.yaml up -d
+      register: msg_zookeeper0
+      notify: show msg_zookeeper0
+    - name: show msg_zookeeper0
+      debug: var=msg_zookeeper0 verbosity=0
+
+    - name: up zookeeper1.yaml
+      command: chdir=/root/go/fabric-samples/newTest docker-compose -f zookeeper1.yaml up -d
+      register: msg_zookeeper1
+      notify: show msg_zookeeper1
+    - name: show msg_zookeeper1
+      debug: var=msg_zookeeper1 verbosity=0
+
+    - name: up zookeeper2.yaml
+      command: chdir=/root/go/fabric-samples/newTest docker-compose -f zookeeper2.yaml up -d
+      register: msg_zookeeper2
+      notify: show msg_zookeeper2
+    - name: show msg_zookeeper2
+      debug: var=msg_zookeeper2 verbosity=0
+
+- hosts: kafka_group
+  name: send file to kafka_group
+  remote_user: root
+  tasks:
+    - name: send kafka0 to 192.168.1.23
+      copy:
+        src: /root/go/fabric-samples/newTest/kafka0.yaml
+        dest: /root/go/fabric-samples/newTest/
+        owner: root
+        group: root
+      notify: up kafka0.yaml
+      when: ansible_default_ipv4.address == "192.168.1.23"
+
+    - name: send kafka1 to 192.168.1.23
+      copy:
+        src: /root/go/fabric-samples/newTest/kafka1.yaml
+        dest: /root/go/fabric-samples/newTest/
+        owner: root
+        group: root
+      notify: up kafka1.yaml
+      when: ansible_default_ipv4.address == "192.168.1.23"
+
+    - name: send kafka2 to 192.168.1.24
+      copy:
+        src: /root/go/fabric-samples/newTest/kafka2.yaml
+        dest: /root/go/fabric-samples/newTest/
+        owner: root
+        group: root
+      notify: up kafka2.yaml
+      when: ansible_default_ipv4.address == "192.168.1.24"
+
+    - name: send kafka3 to 192.168.1.24
+      copy:
+        src: /root/go/fabric-samples/newTest/kafka3.yaml
+        dest: /root/go/fabric-samples/newTest/
+        owner: root
+        group: root
+      notify: up kafka3.yaml
+      when: ansible_default_ipv4.address == "192.168.1.24"
+
+  handlers:
+    - name: up kafka0.yaml
+      command: chdir=/root/go/fabric-samples/newTest docker-compose -f kafka0.yaml up -d
+      register: msg_kafka0
+      notify: show msg_kafka0
+    - name: show msg_kafka0
+      debug: var=msg_kafka0 verbosity=0
+
+    - name: up kafka1.yaml
+      command: chdir=/root/go/fabric-samples/newTest docker-compose -f kafka1.yaml up -d
+      register: msg_kafka1
+      notify: show msg_kafka1
+    - name: show msg_kafka1
+      debug: var=msg_kafka1 verbosity=0
+
+    - name: up kafka2.yaml
+      command: chdir=/root/go/fabric-samples/newTest docker-compose -f kafka2.yaml up -d
+      register: msg_kafka2
+      notify: show msg_kafka2
+    - name: show msg_kafka2
+      debug: var=msg_kafka2 verbosity=0
+
+    - name: up kafka3.yaml
+      command: chdir=/root/go/fabric-samples/newTest docker-compose -f kafka3.yaml up -d
+      register: msg_kafka3
+      notify: show msg_kafka3
+    - name: show msg_kafka3
+      debug: var=msg_kafka3 verbosity=0
+
+- hosts: orderer_group
+  name: send file to orderer_group
+  remote_user: root
+  tasks:
+    - name: send orderer0 to 192.168.1.23
+      copy:
+        src: /root/go/fabric-samples/newTest/orderer0.yaml
+        dest: /root/go/fabric-samples/newTest/
+        owner: root
+        group: root
+      notify: up orderer0.yaml
+      when: ansible_default_ipv4.address == "192.168.1.23"
+
+    - name: send orderer1 to 192.168.1.24
+      copy:
+        src: /root/go/fabric-samples/newTest/orderer1.yaml
+        dest: /root/go/fabric-samples/newTest/
+        owner: root
+        group: root
+      notify: up orderer1.yaml
+      when: ansible_default_ipv4.address == "192.168.1.24"
+
+  handlers:
+    - name: up orderer0.yaml
+      command: chdir=/root/go/fabric-samples/newTest docker-compose -f orderer0.yaml up -d
+      register: msg_orderer0
+      notify: show msg_orderer0
+    - name: show msg_orderer0
+      debug: var=msg_orderer0 verbosity=0
+
+    - name: up orderer1.yaml
+      command: chdir=/root/go/fabric-samples/newTest docker-compose -f orderer1.yaml up -d
+      register: msg_orderer1
+      notify: show msg_orderer1
+    - name: show msg_orderer1
+      debug: var=msg_orderer1 verbosity=0
+
+- hosts: peer_group
+  name: send file to peer_group
+  remote_user: root
+  tasks:
+    - name: send peer0org1 to 192.168.1.23
+      copy:
+        src: /root/go/fabric-samples/newTest/peer0org1.yaml
+        dest: /root/go/fabric-samples/newTest/
+        owner: root
+        group: root
+      notify: up peer0org1.yaml
+      when: ansible_default_ipv4.address == "192.168.1.23"
+
+    - name: send peer1org1 to 192.168.1.24
+      copy:
+        src: /root/go/fabric-samples/newTest/peer1org1.yaml
+        dest: /root/go/fabric-samples/newTest/
+        owner: root
+        group: root
+      notify: up peer1org1.yaml
+      when: ansible_default_ipv4.address == "192.168.1.24"
+
+    - name: send peer0org2 to 192.168.1.23
+      copy:
+        src: /root/go/fabric-samples/newTest/peer0org2.yaml
+        dest: /root/go/fabric-samples/newTest/
+        owner: root
+        group: root
+      notify: up peer0org2.yaml
+      when: ansible_default_ipv4.address == "192.168.1.23"
+
+    - name: send peer1org2 to 192.168.1.24
+      copy:
+        src: /root/go/fabric-samples/newTest/peer1org2.yaml
+        dest: /root/go/fabric-samples/newTest/
+        owner: root
+        group: root
+      notify: up peer1org2.yaml
+      when: ansible_default_ipv4.address == "192.168.1.24"
+
+  handlers:
+    - name: up peer0org1.yaml
+      command: chdir=/root/go/fabric-samples/newTest docker-compose -f peer0org1.yaml up -d
+      register: msg_peer0org1
+      notify: show msg_peer0org1
+    - name: show msg_peer0org1
+      debug: var=msg_peer0org1 verbosity=0
+
+    - name: up peer1org1.yaml
+      command: chdir=/root/go/fabric-samples/newTest docker-compose -f peer1org1.yaml up -d
+      register: msg_peer1org1
+      notify: show msg_peer1org1
+    - name: show msg_peer1org1
+      debug: var=msg_peer1org1 verbosity=0
+
+    - name: up peer0org2.yaml
+      command: chdir=/root/go/fabric-samples/newTest docker-compose -f peer0org2.yaml up -d
+      register: msg_peer0org2
+      notify: show msg_peer0org2
+    - name: show msg_peer0org2
+      debug: var=msg_peer0org2 verbosity=0
+
+    - name: up peer1org2.yaml
+      command: chdir=/root/go/fabric-samples/newTest docker-compose -f peer1org2.yaml up -d
+      register: msg_peer1org2
+      notify: show msg_peer1org2
+    - name: show msg_peer1org2
+      debug: var=msg_peer1org2 verbosity=0
+
